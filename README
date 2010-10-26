@@ -1,2 +1,21 @@
 RTLS software for SDK 2.0;
 Driver for ZigBee module;
+
+Commits:
+1. Discovered registers to work with SPI1:
+SPCR - Регистр управления SPI
+SPSR - Регистр состояния SPI
+SPDR - Регистр данных SPI
+SPCCR - Регистр контроля тактового сигнала SPI
+SPINT - Флаг прерывания SPI
+
+SPCR:
+номер бита
+0		1		2		3		4		5		6		7		8
+R		BE		CPHA	CPOL	MSTR	LSBF	SPIE	BITS	R
+BE -	0 - передавать 8 бит за цикл
+		1 - передавать количество бит, указанное в BITS
+
+2. Beginning writing driver: functions to:
+	- Write/Read 1 byte via SPI
+	- Initialize SPI interface

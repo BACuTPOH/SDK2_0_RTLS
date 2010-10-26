@@ -17,7 +17,7 @@ unsigned char ll_buf;
 ///////////////////////////////////////////////////////////////////////////////
 void init_led( void )
 {
-    init_led_status();
+	init_led_status();
 	init_led_line();
 }
 

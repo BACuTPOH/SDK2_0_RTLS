@@ -37,7 +37,7 @@ $(OBJ): $(SRC)
 		$(CC) $(CFLAGS) $(SRC)
 
 load:
-	$(LPC) $(TGT).hex $(PORT) $(BAUD) $(OSC)
+	$(LPC) $(TGT).hex $(LPCFLAGS)
 clean:
 		rm -rf *.o *.elf *.gdb $(TGT) *.r *.n *.d
 

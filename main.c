@@ -1,39 +1,29 @@
-/**-----------------------------------------------------------------------------
-Проект:     SDK-2.0 
-Название:   Головная программа.
-Файл:       main.c
-Версия:     1.0.1
------------------------------------------------------------------------------*/
-
 #include "lpc2292.h"
 #include "init.h"
 #include "systimer.h"
 #include "led.h"
-
-/*-----------------------------------------------------------------------------
-Функция Main
------------------------------------------------------------------------------*/
-int main( void )
+int main(void)
 {
 	unsigned long i;
+	unsigned char data;
+	unsigned char status;
 
-    init_system();
-    
-	while ( 1 )
+	init_system();
+	IODIR0 |= 0x00000080; 
+	IOCLR0 = 0x00000080; 
+	PINSEL0 |= 0x00001500; 
+
+	VPBDIV = 0x00;
+	S1SPCR = 0x0020;
+	S1SPCCR = 0x8;
+	S1SPDR = 0x10;
+	while (!S1SPSR) {}
+	data=S1SPDR;
+	while (!S1SPSR) {}
+	data=S1SPDR;
+	led_line(data);
+
+	while(1)
 	{
-		led_line( 0xD7 ); // Выводим код 11010111
-		delay_ms( 2000 ); // Ждем 2 секунды
-
-		led_line( 0xA5 ); // Выводим код 10100101
-		delay_ms( 2000 ); // Ждем 2 секунды
-
-		led_line( 0x4B ); // Выводим код 01001011
-		delay_ms( 2000 ); // Ждем 2 секунды
-
-		for ( i = 0; i < 256; i++ )
-		{
-			led_line( i );
-			delay_ms( 100 );
-		}
-    }
+	}
 }                                
